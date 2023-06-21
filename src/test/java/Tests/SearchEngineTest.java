@@ -13,6 +13,7 @@ public class SearchEngineTest extends TestBase {
         searchEngine.searchProductOnMainPage();
         Assert.assertEquals(searchEngine.prefixBoxResultText.getText(), "Wyniki wyszukiwania dla: \"plecak\"");
         Assert.assertTrue(searchEngine.numberOfFindingProductsAfterSearch.isDisplayed());
+
     }
 }
 

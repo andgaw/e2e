@@ -12,7 +12,7 @@ public class SearchEngine {
     public WebElement searchBar;
     @FindBy(css = ".prefixbox-result-text")
     public WebElement prefixBoxResultText;
-    @FindBy ( css = "#prefixbox-result-count-container")
+    @FindBy(css = "#prefixbox-result-count-container")
     public WebElement numberOfFindingProductsAfterSearch;
 
 
@@ -27,5 +27,6 @@ public class SearchEngine {
         searchBar.sendKeys(Keys.RETURN);
 
     }
+
 }
 
