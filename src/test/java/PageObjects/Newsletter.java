@@ -1,24 +1,25 @@
 package PageObjects;
 
-import org.openqa.selenium.WebDriver;
+import static Configuration.DriverManager.getWebDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class Newsletter {
     @FindBy(css = "#name")
-    public WebElement newsletterTypeName;
+    private WebElement newsletterTypeName;
     @FindBy(css = "#newsletter")
-    public WebElement newsletterTypeEmail;
+    private WebElement newsletterTypeEmail;
     @FindBy(css = "button.subscribe")
-    public WebElement newsletterJoinInButton;
+    private WebElement newsletterJoinInButton;
     @FindBy(css = "#agreement")
-    public WebElement ruleNewsletterCheckbox;
+    private WebElement ruleNewsletterCheckbox;
     @FindBy(css = ".message-success > div:nth-child(1)")
-    public WebElement succesMessage;
+    private WebElement succesMessage;
 
-    public Newsletter(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public Newsletter() {
+        PageFactory.initElements(getWebDriver(), this);
     }
 
     public void userJoinToNewsletter() {
@@ -27,5 +28,9 @@ public class Newsletter {
         ruleNewsletterCheckbox.click();
         newsletterJoinInButton.click();
 
+    }
+
+    public WebElement getSuccesMessage() {
+        return succesMessage;
     }
 }
