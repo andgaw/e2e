@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11
+
+    - name: Build with Maven
+      run: mvnw.cmd clean install
+
+    - name: Download ChromeDriver
+      run: Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE" -OutFile "LATEST_RELEASE"
+
+    - name: Install ChromeDriver
+    - name: Set up Maven
+  uses: actions/setup-java@v2
+  with:
+    java-version: 11
+    maven-version: 3.8.3
+    maven-settings: |
+      <settings>
+        <mirrors>
+          <mirror>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <mirrorOf>central</mirrorOf>
+          </mirror>
+        </mirrors>
+        <profiles>
+          <profile>
+            <id>github</id>
+            <repositories>
+              <repository>
+                <id>github</id>
+                <name>GitHub Maven Packages</name>
+                <url>https://maven.pkg.github.com/owner/repo</url>
+              </repository>
+            </repositories>
+          </profile>
+        </profiles>
+        <activeProfiles>
+          <activeProfile>github</activeProfile>
+        </activeProfiles>
+      </settings>
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
